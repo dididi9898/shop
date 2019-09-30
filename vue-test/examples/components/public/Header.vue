@@ -1,29 +1,30 @@
 /*头部导航栏 type:1带搜索框*/
 <template>
     <div>
+<!--   带搜索框的头部    -->
         <van-nav-bar v-if="type == 1"
             :title=msg_title
             left-text="返回"
             left-arrow
             fixed
-            @search="onSearch"
             @click-left="onClickLeft"
             @click-right="onClickRight">
             <van-icon name="search" slot="right" />
         </van-nav-bar>
+<!--   带标题的头部    -->
         <van-nav-bar v-else
                 :title=msg_title
                 left-text="返回"
                 :right-text=msg_right
                 left-arrow
                 fixed
-                @search="onSearch"
                 @click-left="onClickLeft"
                 @click-right="onClickBtn"
         />
         <div style="height: 46px;"></div>
+<!--    搜索框   -->
         <form v-if="type==1" style="z-index:2;position: fixed;top: 0;left:25%;width: 60%" action="/">
-            <van-search style="padding: 5px 0;" placeholder="请输入搜索关键词" v-model="value" />
+            <van-search @search="onSearch" style="padding: 5px 0;" placeholder="请输入搜索关键词" v-model="value" />
         </form>
     </div>
 </template>
@@ -54,11 +55,9 @@
             },
             onClickRight() {
                 this.$emit('func',this.value);//向父组件传输入框的值
-
-                // console.log(this.value)
             },
             onSearch(){
-                console.log(1)
+                console.log(11)
                 this.onClickRight()
             },
             onClickBtn(){
