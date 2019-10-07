@@ -19,4 +19,7 @@
     /*color: #2c3e50;*/
     background: #F8F8F8;
   }
+  .van-overlay{
+    background: rgba(0,0,0,.4) !important;
+  }
 </style>

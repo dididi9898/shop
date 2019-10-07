@@ -40,6 +40,11 @@
             <li v-if="input_type==false" class="form_li">
                 <input type="password" placeholder="再次输入密码" />
             </li>
+            <div class="xieyi">
+                <input id="check" type="checkbox" name="check" value="#f0544d" />
+                <label  for="check"></label >
+                <span>我已阅读并同意<a @click="gotoxieyi">《腾远商城协议》</a></span>
+            </div>
             <li style="height: 15px;"></li>
             <van-button class="res_btn" size="large" round type="info">注册</van-button>
             <li class="pass_text"><span style="color: #666">已有账号 </span><span @click="change_html">立即登录</span></li>
@@ -59,6 +64,9 @@
             }
         },
         methods:{
+            gotoxieyi(){
+                this.$router.push('/xieyi')
+            },
             eye_closed(){
                 console.log(123)
                 this.input_type=!this.input_type;
@@ -122,7 +130,7 @@
     .huoqu_yzm{
         border: none;
         outline: none;
-        text-indent: 0.05rem;
+        text-indent: 0.05px;
         background: #10a78e;
         padding: 3px 5px;
         color: #fff;
@@ -131,5 +139,44 @@
     }
     .huise{
         opacity: 0.6;
+    }
+    .xieyi{
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+        padding: 5px;
+    }
+    .xieyi span{
+        font-size: 12px;
+        color: #bebebe;
+    }
+    .xieyi a{
+        color: #10a78e;
+    }
+    #check +label{
+        display: block;
+        width: 13px;
+        height: 13px;
+        position: absolute;
+        top: 7px;
+        left: 0;
+        border: 1px solid #bebebe;
+    }
+    #check:checked +label{
+        background: #10a78e;
+        border: 1px solid #10a78e;
+    }
+    #check:checked +label::before{
+        display: block;
+        content: "\2714";
+        text-align: center;
+        font-size: 12px;
+        color: #fff;
+        margin-top: -3px;
+    }
+    input[type=checkbox]{
+        width: 13px;
+        height: 13px;
+        visibility: hidden;
     }
 </style>

@@ -3,27 +3,31 @@
         <Header msg_title="编辑个人资料" msg_right="" type="0"></Header>
         <h6>基本信息</h6>
         <div class="box">
+            <van-uploader style="width: 100%">
             <ul style="height: 75px;line-height: 75px">
                 <li>头像</li>
                 <li><img class="touxing" src="./images/touxiang.png" /></li>
                 <li><van-icon style="line-height: 75px" name="arrow" size="16px" /></li>
             </ul>
-            <ul>
+            </van-uploader>
+            <ul @click="gotoedit('昵称')">
                 <li>昵称</li>
                 <li>扯文艺的猿</li>
                 <li><van-icon style="line-height: 50px" name="arrow" size="16px" /></li>
             </ul>
-<!--            <van-action-sheet-->
-<!--                    v-model="show"-->
-<!--                    :actions="actions"-->
-<!--                    @select="onSelect"-->
-<!--            />-->
-            <ul v-model="show" :actions="actions" @click="onSelect">
+            <ul @click="showPopup">
                 <li>性别</li>
                 <li>男</li>
                 <li><van-icon style="line-height: 50px" name="arrow" size="16px" /></li>
             </ul>
-            <ul>
+            <van-popup v-model="show" position="bottom" :style="{width:'92%'}">
+                <van-button type="primary" size="large">男</van-button>
+                <div style="height: 1px;background: rgba(0,0,0,0.4)"></div>
+                <van-button type="primary" size="large">女</van-button>
+                <div style="height: 10px;background: rgba(0,0,0,0.4)"></div>
+                <van-button @click="show=false" type="primary" size="large">取消</van-button>
+            </van-popup>
+            <ul @click="gotosafe">
                 <li>密码</li>
                 <li></li>
                 <li><van-icon style="line-height: 50px" name="arrow" size="16px" /></li>
@@ -33,7 +37,7 @@
                 <li></li>
                 <li><van-icon style="line-height: 50px" name="arrow" size="16px" /></li>
             </ul>
-            <ul>
+            <ul @click="gotoedit('个性签名')">
                 <li>个性签名</li>
                 <li></li>
                 <li><van-icon style="line-height: 50px" name="arrow" size="16px" /></li>
@@ -73,19 +77,23 @@
         },
         data() {
             return {
-                show: false,
-                actions: [
-                    { name: '男' },
-                    { name: '女' },
-                    { name: '选项', subname: '描述信息' }
-                ]
+                show: false
             };
         },
         methods: {
-            onSelect(item) {
-                // 点击选项时默认不会关闭菜单，可以手动关闭
-                this.show = false;
-                this.$toast(item.name);
+            showPopup() {
+                this.show = true;
+            },
+            gotoedit(title){
+                this.$router.push({
+                    path: '/edit',
+                    query:{
+                        title: title,
+                    }
+                });
+            },
+            gotosafe(){
+                this.$router.push('/safe')
             }
         },
     };
@@ -145,5 +153,13 @@
         float: left;
         margin-top: 12px;
         margin-right: 10px;
+    }
+    .van-popup--bottom{
+        border-radius: 5px;
+    }
+    .van-button--primary {
+        color: #515a6e;
+        background-color: #fff;
+        border: unset;
     }
 </style>
