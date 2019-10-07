@@ -10,7 +10,6 @@ import iView from 'iview'
 import locale from 'iview/dist/locale/en-US';
 import './index.less'
 
-
 Vue.use(VueRouter)
 
 Vue.use(iView, { locale });

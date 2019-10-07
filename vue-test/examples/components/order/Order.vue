@@ -3,138 +3,19 @@
         <Header msg_title="订单中心" msg_right="" type="1" @func="getMsgFormSon"></Header>
         <van-tabs v-model="active" animated swipeable>
             <van-tab title="全部">
-                <div class="box" v-for="(item,index) in order_list" :key=index>
-                    <van-card style="background: #fff"
-                            num="2"
-                            price="2.00"
-                            desc="描述信息"
-                            :title= item.title
-                            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    >
-                        <div slot="tags">
-                            <van-tag plain type="danger">标签</van-tag>
-                            <van-tag plain type="danger">标签</van-tag>
-                        </div>
-                        <div v-if="item.type==1" slot="footer">
-                            <van-button size="mini">修改地址</van-button>
-                            <van-button size="mini">取消订单</van-button>
-                            <van-button size="mini">付款</van-button>
-                        </div>
-                        <div v-if="item.type==2" slot="footer">
-                            <van-button size="mini">申请开票</van-button>
-                            <van-button size="mini">挑选服务</van-button>
-                        </div>
-                        <div v-if="item.type==3" slot="footer">
-                            <van-button size="mini">查看物流</van-button>
-                            <van-button size="mini">挑选服务</van-button>
-                            <van-button style="border-color: #FF5000;color: #FF5000" size="mini">确认收货</van-button>
-                        </div>
-                        <div v-if="item.type==4" slot="footer">
-                            <van-button size="mini">查看物流</van-button>
-                            <van-button size="mini">卖了换钱</van-button>
-                            <van-button size="mini">评价</van-button>
-                        </div>
-                    </van-card>
-                </div>
+                <Order_min @emit_address="handleGetTotal" type="0"></Order_min>
             </van-tab>
             <van-tab title="待付款">
-                <div v-for="(item,index) in order_list" :key=index>
-                    <template v-if="item.type==1">
-                        <div class="box" >
-                            <van-card style="background: #fff"
-                              num="2"
-                              price="2.00"
-                              desc="描述信息"
-                              :title= item.title
-                              thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    >
-                        <div slot="tags">
-                            <van-tag plain type="danger">标签</van-tag>
-                            <van-tag plain type="danger">标签</van-tag>
-                        </div>
-                        <div slot="footer">
-                            <van-button size="mini">修改地址</van-button>
-                            <van-button size="mini">取消订单</van-button>
-                            <van-button size="mini">付款</van-button>
-                        </div>
-                    </van-card>
-                        </div>
-                    </template>
-                </div>
+                <Order_min @address="handleGetTotal" @delOrder="handleGetTotal" @pay="handleGetTotal"  type="1"></Order_min>
             </van-tab>
             <van-tab title="待发货">
-                <div v-for="(item,index) in order_list"  :key=index>
-                    <template v-if="item.type==2">
-                        <div class="box">
-                            <van-card style="background: #fff"
-                              num="2"
-                              price="2.00"
-                              desc="描述信息"
-                              :title= item.title
-                              thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    >
-                        <div slot="tags">
-                            <van-tag plain type="danger">标签</van-tag>
-                            <van-tag plain type="danger">标签</van-tag>
-                        </div>
-                        <div slot="footer">
-                            <van-button size="mini">申请开票</van-button>
-                            <van-button size="mini">挑选服务</van-button>
-                        </div>
-                    </van-card>
-                        </div>
-                    </template>
-                </div>
+                <Order_min @emit_address="handleGetTotal" type="2"></Order_min>
             </van-tab>
             <van-tab title="待收货">
-                <div v-for="(item,index) in order_list" :key=index>
-                    <template v-if="item.type==3">
-                        <div class="box"  >
-                            <van-card style="background: #fff"
-                              num="2"
-                              price="2.00"
-                              desc="描述信息"
-                              :title= item.title
-                              thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    >
-                        <div slot="tags">
-                            <van-tag plain type="danger">标签</van-tag>
-                            <van-tag plain type="danger">标签</van-tag>
-                        </div>
-                        <div slot="footer">
-                            <van-button size="mini">查看物流</van-button>
-                            <van-button size="mini">挑选服务</van-button>
-                            <van-button style="border-color: #FF5000;color: #FF5000" size="mini">确认收货</van-button>
-                        </div>
-                    </van-card>
-                        </div>
-                    </template>
-                </div>
+                <Order_min @emit_address="handleGetTotal" type="3"></Order_min>
             </van-tab>
             <van-tab title="待评价">
-                <div v-for="(item,index) in order_list" :key=index>
-                    <template v-if="item.type==4">
-                        <div class="box" >
-                            <van-card style="background: #fff"
-                                  num="2"
-                                  price="2.00"
-                                  desc="描述信息"
-                                  :title= item.title
-                                  thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-                        >
-                            <div slot="tags">
-                                <van-tag plain type="danger">标签</van-tag>
-                                <van-tag plain type="danger">标签</van-tag>
-                            </div>
-                            <div slot="footer">
-                                <van-button size="mini">查看物流</van-button>
-                                <van-button size="mini">卖了换钱</van-button>
-                                <van-button size="mini">评价</van-button>
-                            </div>
-                        </van-card>
-                        </div>
-                    </template>
-                </div>
+                <Order_min @emit_address="handleGetTotal" type="4"></Order_min>
             </van-tab>
         </van-tabs>
     </div>
@@ -142,24 +23,16 @@
 
 <script>
     import Header from '../public/Header'
+    import Order_min from './Order_min'
     export default {
         components: {
             Header,
+            Order_min,
         },
         data() {
             return {
                 msgFormSon:'',
                 active: 0,
-                order_list:[
-                    {type:1,title:"待付款标题1"},
-                    {type:2,title:"待发货标题1"},
-                    {type:3,title:"待收货标题1"},
-                    {type:4,title:"待评价标题1"},
-                    {type:1,title:"待付款标题2"},
-                    {type:2,title:"待发货标题2"},
-                    {type:3,title:"待收货标题2"},
-                    {type:4,title:"待评价标题2"},
-                ]
             };
         },
         methods: {
@@ -167,11 +40,15 @@
                 this.msgFormSon = data;
                 console.log(this.msgFormSon)
             },
+            handleGetTotal(value){
+                console.log(value);
+                this.$router.push('/address_list')
+            },
         },
     };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .van-tabs--line .van-tabs__wrap{
     width: 100%;
     position: fixed;
@@ -182,6 +59,9 @@
     padding: 0 5px;
     border-radius: 11px;
 }
+/*.van-tabs__track{*/
+/*    height: calc(100vh - 10px);*/
+/*}*/
     .box{
         width: 95%;
         height: auto;
@@ -191,5 +71,18 @@
         box-sizing: border-box;
         padding: 5px 0;
         margin: 10px;
+    }
+.box_title{
+    float: left;
+    font-size: 14px;
+}
+.box_type{
+    float: right;
+    font-size: 12px;
+    color: #FF5000;
+}
+    .box_head{
+        width: 92%;
+        margin: 0 auto;
     }
 </style>
